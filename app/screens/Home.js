@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View, StatusBar, ScrollView, TouchableOpacity, Image, Dimensions } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import colors from '../config/colors';
 import SPACING from '../config/SPACING';
@@ -11,15 +11,48 @@ import { Ionicons } from "@expo/vector-icons";
 // const avatar = require('../../assets/avatar.jpg');
 const logo = require('../../assets/logo.png');
 
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
+
 import SearchFeild from "../components/SearchField"
 import Categories from "../components/Categories";
 
 
 const { width } = Dimensions.get("window");
 
+WebBrowser.maybeCompleteAuthSession();
+
 const Home = ({ navigation }) => {
 
   const [activeCategoryId, setActiveCategoryId] = useState(0);
+
+  const [accessToken, setAccessToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId: "548656183832-mpmjsdncp1a133vlffe6kfagkivgu3c9.apps.googleusercontent.com",
+    iosClientId: "548656183832-pq4p1cjmqj7mnjh0kj2n4s3j4abet68s.apps.googleusercontent.com",
+    androidClientId: "548656183832-ilji6agt3q2q8rmr9h0gav19660ononp.apps.googleusercontent.com"
+  });
+
+  useEffect(() => {
+    if (response?.type === "success") {
+      setAccessToken(response.authentication.accessToken);
+
+      accessToken && fetchUserInfo();
+    }
+  }, [response, accessToken]);
+
+  const fetchUserInfo = async () => {
+    let res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+
+    const userInfo = await res.json();
+    setUser(userInfo);
+
+  }
 
 
   return (
@@ -64,16 +97,33 @@ const Home = ({ navigation }) => {
               height: SPACING * 4,
               overflow: "hidden",
               borderRadius: SPACING,
-            }}>
+            }}
+              disabled={!request}
+            >
               <BlurView style={{
                 width: "100%",
                 height: "100%",
                 padding: SPACING / 2,
               }}>
-                <Ionicons
-                  name="person"
-                  size={SPACING * 3}
-                />
+                {
+                  user &&
+                  <>
+                    <Image
+                      style={{ width: "100%", height: "100%", borderRadius: SPACING }}
+                      source={{ uri: `${user.picture}` }}
+                    />
+                  </>
+                }
+                {
+                  user === null &&
+                  <>
+                    <Ionicons
+                      name="person"
+                      size={SPACING * 3}
+                      onPress={() => { promptAsync() }}
+                    />
+                  </>
+                }
               </BlurView>
             </TouchableOpacity>
 

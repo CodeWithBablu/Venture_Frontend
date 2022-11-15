@@ -131,8 +131,8 @@ const ProductDetails = ({ route, navigation }) => {
                   }}>
                     <View style={{
                       padding: SPACING / 2,
-                      width: SPACING * 6,
-                      height: SPACING * 6,
+                      width: SPACING * 5,
+                      height: SPACING * 5,
                       borderRadius: SPACING,
                       backgroundColor: colors.dark,
                       justifyContent: "center",
@@ -146,8 +146,8 @@ const ProductDetails = ({ route, navigation }) => {
                     </View>
                     <View style={{
                       padding: SPACING / 2,
-                      width: SPACING * 6,
-                      height: SPACING * 6,
+                      width: SPACING * 5,
+                      height: SPACING * 5,
                       borderRadius: SPACING,
                       backgroundColor: colors.dark,
                       justifyContent: "center",
