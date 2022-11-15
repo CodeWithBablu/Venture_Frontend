@@ -14,7 +14,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Home from "./app/screens/Home";
 import ProductDetails from './app/screens/ProductDetails';
-import { useEffect, useState } from 'react';
+import { Cart } from './app/screens/Cart';
+import { Profile } from './app/screens/Profile';
+
+import { NavBar } from './app/components/NavBar';
+
 import colors from './app/config/colors';
 
 const Stack = createNativeStackNavigator();
@@ -42,7 +46,10 @@ export default function App() {
       }}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Details" component={ProductDetails} />
+        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
+      <NavBar />
     </NavigationContainer>
   );
 }

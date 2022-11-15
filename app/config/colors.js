@@ -9,7 +9,10 @@ export default {
   secondary: '#e0f4f1',
   grey: '#908e8c',
   orange: '#f5a623',
+  lightBlue: '#c3f9b1',
+  // lightBlue: '#D0EAF9',
 };
 
 
 // light: '#f9f9f9',
+// #D8D7DB

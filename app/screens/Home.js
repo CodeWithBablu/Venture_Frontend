@@ -74,14 +74,17 @@ const Home = ({ navigation }) => {
             <TouchableOpacity style={{
               borderRadius: SPACING,
               overflow: "hidden",
-              width: SPACING * 4,
-              height: SPACING * 4,
+              width: SPACING * 4.5,
+              height: SPACING * 4.5,
             }}>
               <BlurView style={{
                 height: "100%",
                 justifyContent: "center",
                 alignItems: "center",
-              }}>
+              }}
+                tint="light"
+                intensity={30}
+              >
                 <Image
                   style={{
                     width: "100%",
@@ -93,8 +96,8 @@ const Home = ({ navigation }) => {
             </TouchableOpacity>
 
             <TouchableOpacity style={{
-              width: SPACING * 4,
-              height: SPACING * 4,
+              width: SPACING * 4.5,
+              height: SPACING * 4.5,
               overflow: "hidden",
               borderRadius: SPACING,
             }}
@@ -104,7 +107,10 @@ const Home = ({ navigation }) => {
                 width: "100%",
                 height: "100%",
                 padding: SPACING / 2,
-              }}>
+              }}
+                tint="light"
+                intensity={40}
+              >
                 {
                   user &&
                   <>
@@ -119,7 +125,7 @@ const Home = ({ navigation }) => {
                   <>
                     <Ionicons
                       name="person"
-                      size={SPACING * 3}
+                      size={SPACING * 3.5}
                       onPress={() => { promptAsync() }}
                     />
                   </>
