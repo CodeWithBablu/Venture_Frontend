@@ -273,7 +273,7 @@ export default [
     id: 16,
     name: "Low-Top Lace-Up Casual Shoes",
     image: require("../../assets/MShoes/2.webp"),
-    price: " ",
+    price: "799",
     details:
       `
       1. Wipe with a clean, dry cloth when needed

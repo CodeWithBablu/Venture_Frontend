@@ -12,17 +12,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Android:  548656183832-ilji6agt3q2q8rmr9h0gav19660ononp.apps.googleusercontent.com
 
-import Home from "./app/screens/Home";
-import ProductDetails from './app/screens/ProductDetails';
-import { Cart } from './app/screens/Cart';
-import { Profile } from './app/screens/Profile';
-
-import { NavBar } from './app/components/NavBar';
+import NavBar from './app/components/NavBar';
 
 import colors from './app/config/colors';
-
-const Stack = createNativeStackNavigator();
-
 
 export default function App() {
 
@@ -40,15 +32,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor={colors.dark} style="inverted" />
-      <Stack.Navigator initialRouteName="Home" screenOptions={{
-        headerShown: false,
-      }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Details" component={ProductDetails} />
-        <Stack.Screen name="Cart" component={Cart} />
-        <Stack.Screen name="Profile" component={Profile} />
-      </Stack.Navigator>
+      <StatusBar backgroundColor={colors.dark} style="light" />
       <NavBar />
     </NavigationContainer>
   );

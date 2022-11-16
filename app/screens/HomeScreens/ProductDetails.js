@@ -3,8 +3,8 @@ import React, { useState } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import SPACING from "../config/SPACING";
-import colors from "../config/colors";
+import SPACING from "../../config/SPACING";
+import colors from "../../config/colors";
 import { BlurView } from "expo-blur";
 
 const { height, width } = Dimensions.get("window");
@@ -15,7 +15,12 @@ const ProductDetails = ({ route, navigation }) => {
 
   const [activeSize, setActiveSize] = useState("S");
 
-  const { id, product } = route.params;
+
+  if (route.params === undefined)
+    return null;
+  else {
+    var { id, product } = route.params;
+  }
 
   return (
     <View style={{
@@ -50,9 +55,9 @@ const ProductDetails = ({ route, navigation }) => {
               }}>
                 <Ionicons
                   name="arrow-back"
-                  size={SPACING * 2}
+                  size={SPACING * 3}
                   color={colors.light}
-                  onPress={() => navigation.navigate('Home')}
+                  onPress={() => navigation.navigate('HomeScreen')}
                 />
               </TouchableOpacity>
 
@@ -63,7 +68,7 @@ const ProductDetails = ({ route, navigation }) => {
               }}>
                 <Ionicons
                   name="heart"
-                  size={SPACING * 2}
+                  size={SPACING * 3}
                   color={colors.light}
                 />
               </TouchableOpacity>
@@ -129,7 +134,7 @@ const ProductDetails = ({ route, navigation }) => {
                     alignItems: "center",
                     justifyContent: "space-between"
                   }}>
-                    <View style={{
+                    <TouchableOpacity style={{
                       padding: SPACING / 2,
                       width: SPACING * 5,
                       height: SPACING * 5,
@@ -143,8 +148,8 @@ const ProductDetails = ({ route, navigation }) => {
                         size={SPACING * 4}
                         color={colors.primary}
                       />
-                    </View>
-                    <View style={{
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{
                       padding: SPACING / 2,
                       width: SPACING * 5,
                       height: SPACING * 5,
@@ -158,7 +163,7 @@ const ProductDetails = ({ route, navigation }) => {
                         size={SPACING * 4}
                         color={colors.primary}
                       />
-                    </View>
+                    </TouchableOpacity>
                   </View>
 
                   <View
@@ -265,7 +270,9 @@ const ProductDetails = ({ route, navigation }) => {
 
       <View style={{
         flexDirection: "row",
+        paddingTop: SPACING,
         justifyContent: "space-between",
+        marginBottom: SPACING * 12,
       }}>
 
         <View
@@ -275,7 +282,7 @@ const ProductDetails = ({ route, navigation }) => {
             paddingLeft: SPACING * 3,
           }}
         >
-          <Text style={{ color: colors.orange, fontSize: SPACING * 1.5 }}>
+          <Text style={{ color: colors.icon, fontSize: SPACING * 1.5 }}>
             Price
           </Text>
           <View style={{ flexDirection: "row" }}>
@@ -298,7 +305,8 @@ const ProductDetails = ({ route, navigation }) => {
           style={{
             marginRight: SPACING,
             backgroundColor: colors.primary,
-            width: width / 2 + SPACING * 3,
+            width: width / 2 + SPACING * 2,
+            height: SPACING * 7,
             justifyContent: "center",
             alignItems: "center",
             borderRadius: SPACING * 2,

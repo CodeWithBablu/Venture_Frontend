@@ -1,3 +1,5 @@
+import colors from "./colors";
+
 export const FONTS = {
   bold: "InterBold",
   semiBold: "InterSemiBold",
@@ -8,7 +10,7 @@ export const FONTS = {
 
 export const SHADOWS = {
   light: {
-    shadowColor: COLORS.gray,
+    shadowColor: colors.shadow,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -19,7 +21,7 @@ export const SHADOWS = {
     elevation: 3,
   },
   medium: {
-    shadowColor: COLORS.gray,
+    shadowColor: colors.shadow,
     shadowOffset: {
       width: 0,
       height: 3,
@@ -30,14 +32,14 @@ export const SHADOWS = {
     elevation: 7,
   },
   dark: {
-    shadowColor: COLORS.gray,
+    shadowColor: colors.shadow,
     shadowOffset: {
       width: 0,
       height: 7,
     },
-    shadowOpacity: 0.41,
+    shadowOpacity: 0.8,
     shadowRadius: 9.11,
 
-    elevation: 14,
+    elevation: 8,
   },
 };

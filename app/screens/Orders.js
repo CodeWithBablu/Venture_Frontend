@@ -1,16 +1,16 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 
-const Cart = () => {
+const Orders = () => {
   return (
     <View style={{
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
     }}>
-      <Text>Cart Section</Text>
+      <Text>Orders</Text>
     </View>
   )
 }
 
-export default Cart;
+export default Orders
