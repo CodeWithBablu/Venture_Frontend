@@ -14,8 +14,16 @@ const logo = require('../../../assets/logo.png');
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 
-import SearchFeild from "../../components/SearchField"
+import SearchFeild from "../../components/SearchField";
 import Categories from "../../components/Categories";
+
+//Data Layer ( user )
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../../slices/userSlices";
+
+//AsyncStorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 const { width } = Dimensions.get("window");
@@ -23,6 +31,8 @@ const { width } = Dimensions.get("window");
 WebBrowser.maybeCompleteAuthSession();
 
 const HomeScreen = ({ navigation }) => {
+
+  const dispatch = useDispatch(); // Redux
 
   const [activeCategoryId, setActiveCategoryId] = useState(0);
 
@@ -38,20 +48,49 @@ const HomeScreen = ({ navigation }) => {
     if (response?.type === "success") {
       setAccessToken(response.authentication.accessToken);
 
-      accessToken && fetchUserInfo();
+      accessToken && setUserInfo();
     }
   }, [response, accessToken]);
 
-  const fetchUserInfo = async () => {
-    let res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
+  const setUserInfo = async () => {
+
+    const AsyncUserData = async () => {
+      try {
+        const userData = await AsyncStorage.getItem('user')
+
+        if (userData == null) {
+          let res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            }
+          });
+
+          const userInfo = await res.json();
+          setUser(userInfo);
+          dispatch(setUserData(userInfo)); // store into redux
+
+          try {
+            const userData = JSON.stringify(userInfo)
+            await AsyncStorage.setItem('user', userData);
+          } catch (e) {
+            // saving error
+            console.log(e);
+          }
+        }
+        else {
+          setUser(userData);
+          dispatch(setUserData(userData));
+        }
+      } catch (e) {
+        // error reading value
+        console.log(e);
       }
-    });
+    }
 
-    const userInfo = await res.json();
-    setUser(userInfo);
 
+
+
+    console.log(userInfo); //  Shows User Info <=============
   }
 
 

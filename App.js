@@ -3,6 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { useFonts } from "expo-font";
 
+import { Provider } from 'react-redux';
+import { store } from './store';
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -31,10 +34,12 @@ export default function App() {
   if (!loaded) return null;
 
   return (
-    <NavigationContainer>
-      <StatusBar backgroundColor={colors.dark} style="light" />
-      <NavBar />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <StatusBar backgroundColor={colors.dark} style="light" />
+        <NavBar />
+      </NavigationContainer>
+    </Provider>
   );
 }
 

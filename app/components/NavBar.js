@@ -33,11 +33,11 @@ const NavBar = () => {
         headerShown: false,
         tabBarStyle: {
           position: 'absolute',
-          bottom: SPACING * 2,
+          bottom: SPACING,
           left: SPACING * 2,
           right: SPACING * 2,
           backgroundColor: colors.dark,
-          borderRadius: SPACING * 2.5,
+          borderRadius: SPACING * 3,
           borderTopColor: colors.dark,
           height: SPACING * 8,
           ...SHADOWS.dark,
@@ -47,8 +47,8 @@ const NavBar = () => {
       <Tab.Screen name='Home' component={Home} options={{
         tabBarIcon: ({ focused }) => (
           <View style={{
-            width: SPACING * 5.5,
-            height: SPACING * 5.5,
+            width: SPACING * 5,
+            height: SPACING * 5,
             borderRadius: SPACING * 2,
             backgroundColor: focused ? colors.lightBlue : colors.dark,
             justifyContent: "center",
@@ -63,8 +63,8 @@ const NavBar = () => {
       <Tab.Screen name='Profile' component={Profile} options={{
         tabBarIcon: ({ focused }) => (
           <View style={{
-            width: SPACING * 5.5,
-            height: SPACING * 5.5,
+            width: SPACING * 5,
+            height: SPACING * 5,
             borderRadius: SPACING * 2,
             backgroundColor: focused ? colors.lightBlue : colors.dark,
             justifyContent: "center",
@@ -79,8 +79,8 @@ const NavBar = () => {
       <Tab.Screen name='Setting' component={Setting} options={{
         tabBarIcon: ({ focused }) => (
           <View style={{
-            width: SPACING * 5.5,
-            height: SPACING * 5.5,
+            width: SPACING * 5,
+            height: SPACING * 5,
             borderRadius: SPACING * 2,
             backgroundColor: focused ? colors.lightBlue : colors.dark,
             justifyContent: "center",
@@ -95,8 +95,8 @@ const NavBar = () => {
       <Tab.Screen name='Order' component={Orders} options={{
         tabBarIcon: ({ focused }) => (
           <View style={{
-            width: SPACING * 5.5,
-            height: SPACING * 5.5,
+            width: SPACING * 5,
+            height: SPACING * 5,
             borderRadius: SPACING * 2,
             backgroundColor: focused ? colors.lightBlue : colors.dark,
             justifyContent: "center",
@@ -111,8 +111,8 @@ const NavBar = () => {
       <Tab.Screen name='Cart' component={Cart} options={{
         tabBarIcon: ({ focused }) => (
           <View style={{
-            width: SPACING * 5.5,
-            height: SPACING * 5.5,
+            width: SPACING * 5,
+            height: SPACING * 5,
             borderRadius: SPACING * 2,
             backgroundColor: focused ? colors.lightBlue : colors.dark,
             justifyContent: "center",
