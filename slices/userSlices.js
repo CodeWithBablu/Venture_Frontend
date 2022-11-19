@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: null,
+  data: {},
 }
 
 
@@ -15,7 +15,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserData } = navSlice.actions;
+export const { setUserData } = userSlice.actions;
 
 //Selectors
 export const selectUserData = (state) => state.user.data;

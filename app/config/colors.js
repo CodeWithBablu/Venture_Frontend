@@ -9,9 +9,30 @@ export default {
   lightBlue: '#c3f9b1',
   icon: '#9bc0ff',
   shadow: '#aef6ae',
-  // lightBlue: '#D0EAF9',
+  profile: {
+    back: '#B18C95',
+    primary: '#849b94',
+    secondary: '#c0e2d8',
+    text: '#018594'
+  }
 };
 
 
-// light: '#f9f9f9',
-// #D8D7DB
+// primary: '#849b94',
+//     secondary: '#c0e2d8',
+//     text: '#018594'
+
+// primary: '#016b70',
+//     secondary: '#20ac53',
+//     text: '#94d104'
+
+// primary: '#a3a094',
+//     secondary: '#E2DECD',
+
+// primary: '#7a8579',
+//     secondary: '#C4CFB9',
+//     text: '#0a808f'
+
+
+// primary: '#A0AE9F',
+//     secondary: '#C4CFB9',

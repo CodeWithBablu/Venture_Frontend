@@ -54,43 +54,43 @@ const HomeScreen = ({ navigation }) => {
 
   const setUserInfo = async () => {
 
-    const AsyncUserData = async () => {
-      try {
-        const userData = await AsyncStorage.getItem('user')
 
-        if (userData == null) {
-          let res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-            headers: {
-              Authorization: `Bearer ${accessToken}`
-            }
-          });
+    try {
+      const userDataJson = await AsyncStorage.getItem('user');
 
-          const userInfo = await res.json();
-          setUser(userInfo);
-          dispatch(setUserData(userInfo)); // store into redux
-
-          try {
-            const userData = JSON.stringify(userInfo)
-            await AsyncStorage.setItem('user', userData);
-          } catch (e) {
-            // saving error
-            console.log(e);
+      if (userDataJson == null) {
+        let res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
           }
+        });
+
+        const userInfo = await res.json();
+        setUser(userInfo);
+        dispatch(setUserData(userInfo)); // store into redux
+        console.log(userInfo); //  Shows User Info <=============
+
+        try {
+          const userData = JSON.stringify(userInfo)
+          await AsyncStorage.setItem('user', userData);
+        } catch (e) {
+          // saving error
+          console.log(e);
         }
-        else {
-          setUser(userData);
-          dispatch(setUserData(userData));
-        }
-      } catch (e) {
-        // error reading value
-        console.log(e);
       }
+      else {
+        const userData = await JSON.parse(userDataJson);
+        setUser(userData);
+        dispatch(setUserData(userData));
+        console.log("Async");
+        console.log(userData);
+      }
+    } catch (e) {
+      // error reading value
+      console.log(e);
     }
 
 
-
-
-    console.log(userInfo); //  Shows User Info <=============
   }
 
 
