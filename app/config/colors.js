@@ -9,6 +9,16 @@ export default {
   lightBlue: '#c3f9b1',
   icon: '#9bc0ff',
   shadow: '#aef6ae',
+  rose: '#fc84a2',
+  setting: {
+    red: '#DF305C',
+    lemon: '#FFEA00',
+    green: '#266A61',
+    dark: '#2f2f2f',
+    back: '#F2E5E0',
+    primary: '#78AD92',
+    secondary: '#A1B59F'
+  },
   profile: {
     back: '#B18C95',
     primary: '#849b94',
@@ -16,6 +26,11 @@ export default {
     text: '#018594'
   }
 };
+
+
+// setting
+// back: '#A1B59F',
+//     primary: '#54594E',
 
 
 // primary: '#849b94',

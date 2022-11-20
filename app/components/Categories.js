@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import categories from "../config/categories";
 import colors from "../config/colors";
 import SPACING from "../config/SPACING";
+import { FONTS } from "../config";
 
 const Categories = ({ onChange }) => {
   const [activeCategoryId, setActiveCategoryId] = useState(0);
@@ -25,21 +26,22 @@ const Categories = ({ onChange }) => {
       horizontal={true}
       contentContainerStyle={{
         marginVertical: SPACING,
+        marginLeft: SPACING * 3,
       }}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <TouchableOpacity style={{
-          marginRight: SPACING * 2,
+          marginRight: SPACING * 3,
         }}
           onPress={() => handlePress(item.id)}
         >
           <Text style={[
-            { color: colors.secondary, fontSize: SPACING * 2, },
-            activeCategoryId === item.id && { color: colors.primary }
+            { color: colors["white-smoke"], fontSize: SPACING * 1.6, paddingHorizontal: SPACING * 2, paddingVertical: SPACING, fontFamily: FONTS.bold },
+            activeCategoryId === item.id && { color: colors.rose, borderTopLeftRadius: SPACING * 3.5, borderBottomLeftRadius: SPACING * 2.5, borderBottomRightRadius: SPACING * 3.5, borderTopRightRadius: SPACING * 2, borderWidth: 2, borderColor: colors.rose, }
           ]}>
             {item.name}
           </Text>
-          {activeCategoryId === item.id && (
+          {/* {activeCategoryId === item.id && (
             <View style={{
               height: SPACING / 2,
               width: SPACING * 4,
@@ -48,7 +50,7 @@ const Categories = ({ onChange }) => {
               marginTop: SPACING / 2,
             }}
             />
-          )}
+          )} */}
         </TouchableOpacity>
       )}
     />

@@ -6,19 +6,19 @@ const categories = [
   },
   {
     id: 1,
-    name: "Women-Top",
+    name: "Tops",
   },
   {
     id: 2,
-    name: "Women-Jeans"
+    name: "Jeans"
   },
   {
     id: 3,
-    name: "Men-Shirts",
+    name: "Shirts",
   },
   {
     id: 4,
-    name: "Men-Shoes",
+    name: "Shoes",
   }
 ];
 

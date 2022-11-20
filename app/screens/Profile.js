@@ -14,7 +14,6 @@ const avatar = require('../../assets/avatar.jpg');
 const Profile = () => {
 
   const User = useSelector(selectUserData);
-  console.log(User);
 
   return (
     <View style={{
@@ -47,6 +46,7 @@ const Profile = () => {
                 height: SPACING * 18,
                 borderRadius: SPACING * 3,
               }}
+                resizeMode="contain"
                 source={User.picture === undefined ? avatar : { uri: `${User.picture}` }}
               />
 

@@ -18,11 +18,12 @@ import SearchFeild from "../../components/SearchField";
 import Categories from "../../components/Categories";
 
 //Data Layer ( user )
-import { useDispatch } from "react-redux";
-import { setUserData } from "../../../slices/userSlices";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserData, setUserData } from "../../../slices/userSlices";
 
 //AsyncStorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FONTS } from "../../config";
 
 
 
@@ -33,6 +34,10 @@ WebBrowser.maybeCompleteAuthSession();
 const HomeScreen = ({ navigation }) => {
 
   const dispatch = useDispatch(); // Redux
+
+  const User = useSelector(selectUserData);
+
+  console.log(`User is: ${User}`);
 
   const [activeCategoryId, setActiveCategoryId] = useState(0);
 
@@ -45,11 +50,7 @@ const HomeScreen = ({ navigation }) => {
   });
 
   useEffect(() => {
-    if (response?.type === "success") {
-      setAccessToken(response.authentication.accessToken);
-
-      accessToken && setUserInfo();
-    }
+    setUserInfo();
   }, [response, accessToken]);
 
   const setUserInfo = async () => {
@@ -59,31 +60,39 @@ const HomeScreen = ({ navigation }) => {
       const userDataJson = await AsyncStorage.getItem('user');
 
       if (userDataJson == null) {
-        let res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
+
+        if (response?.type === "success")
+          setAccessToken(response.authentication.accessToken);
+
+        if (accessToken) {
+
+          let res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            }
+          });
+
+          const userInfo = await res.json();
+          setUser(userInfo);
+          dispatch(setUserData(userInfo)); // store into redux
+          console.log(`userInfo is: ${userInfo}`); //  Shows User Info <=============
+
+          try {
+            const userData = JSON.stringify(userInfo)
+            await AsyncStorage.setItem('user', userData);
+          } catch (e) {
+            // saving error
+            console.log(e);
           }
-        });
-
-        const userInfo = await res.json();
-        setUser(userInfo);
-        dispatch(setUserData(userInfo)); // store into redux
-        console.log(userInfo); //  Shows User Info <=============
-
-        try {
-          const userData = JSON.stringify(userInfo)
-          await AsyncStorage.setItem('user', userData);
-        } catch (e) {
-          // saving error
-          console.log(e);
         }
       }
       else {
         const userData = await JSON.parse(userDataJson);
+        console.log(`userData is: ${userData}`);
         setUser(userData);
         dispatch(setUserData(userData));
         console.log("Async");
-        console.log(userData);
+
       }
     } catch (e) {
       // error reading value
@@ -135,45 +144,71 @@ const HomeScreen = ({ navigation }) => {
               </BlurView>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{
-              width: SPACING * 5,
-              height: SPACING * 5,
-              overflow: "hidden",
-              borderRadius: SPACING * 2,
-            }}
-              disabled={!request}
-            >
-              <BlurView style={{
-                width: "100%",
-                height: "100%",
-                padding: SPACING / 4,
-                justifyContent: "center",
-                alignItems: "center",
+            {/* //// For Profile name and Profile picture */}
+            <View style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}>
+
+              <Text style={{
+                color: colors.white,
+                fontSize: SPACING * 1.4,
+                fontFamily: FONTS.semiBold,
+              }}>{User.name == undefined ?
+
+                "" : `Hello, `}</Text>
+
+              <Text style={{
+                color: colors.rose,
+                marginRight: SPACING,
+                fontSize: SPACING * 1.4,
+                fontFamily: FONTS.semiBold,
+              }}>{User.name == undefined ?
+
+                "Hey! Good to see you there 🤩️ " : `${User.name}`}</Text>
+
+              <TouchableOpacity style={{
+                width: SPACING * 5,
+                height: SPACING * 5,
+                overflow: "hidden",
+                borderRadius: SPACING * 2,
               }}
-                tint="light"
-                intensity={30}
+                disabled={!request}
               >
-                {
-                  user &&
-                  <>
-                    <Image
-                      style={{ width: "100%", height: "100%", borderRadius: SPACING * 3 }}
-                      source={{ uri: `${user.picture}` }}
-                    />
-                  </>
-                }
-                {
-                  user === null &&
-                  <>
-                    <Ionicons
-                      name="person"
-                      size={SPACING * 3.5}
-                      onPress={() => { promptAsync() }}
-                    />
-                  </>
-                }
-              </BlurView>
-            </TouchableOpacity>
+                <BlurView style={{
+                  width: "100%",
+                  height: "100%",
+                  padding: SPACING / 4,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                  tint="light"
+                  intensity={30}
+                >
+                  {
+                    User.picture &&
+                    <>
+                      <Image
+                        style={{ width: "100%", height: "100%", borderRadius: SPACING * 3 }}
+                        source={{ uri: `${User.picture}` }}
+                        resizeMode="contain"
+                      />
+                    </>
+                  }
+                  {
+                    User.picture == null &&
+                    <>
+                      <Ionicons
+                        name="person"
+                        size={SPACING * 3.5}
+                        onPress={() => { promptAsync() }}
+                      />
+                    </>
+                  }
+                </BlurView>
+              </TouchableOpacity>
+
+            </View>
 
           </View>
 
