@@ -79,6 +79,7 @@ const Profile = () => {
           <View style={{
             alignItems: "center",
             marginTop: SPACING * 4,
+            marginBottom: SPACING * 4,
           }}>
 
             <View style={styles.saveViewBoxStyle}>
@@ -108,7 +109,7 @@ const Profile = () => {
 
 
 
-            <View style={styles.saveViewBoxStyle}>
+            <TouchableOpacity style={styles.saveViewBoxStyle}>
 
               <Text style={styles.labelStyle}>Address</Text>
 
@@ -125,9 +126,9 @@ const Profile = () => {
                 <Ionicons name='checkmark-done' size={SPACING * 5} />
               </View>
 
-            </View>
+            </TouchableOpacity>
 
-            <View style={styles.saveViewBoxStyle}>
+            <TouchableOpacity style={styles.saveViewBoxStyle}>
 
               <Text style={styles.labelStyle}>Contact</Text>
 
@@ -144,7 +145,7 @@ const Profile = () => {
                 <Ionicons name='checkmark-done' size={SPACING * 5} />
               </View>
 
-            </View>
+            </TouchableOpacity>
 
 
 

@@ -1,9 +1,10 @@
 
 import React from 'react'
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, Image } from "react-native";
 import SPACING from '../config/SPACING';
 import colors from '../config/colors';
 import { SHADOWS } from '../config';
+
 
 const { width } = Dimensions.get("window");
 
@@ -20,10 +21,15 @@ import UserIcon from '../../assets/Navbar/UserIcon';
 import SettingIcon from '../../assets/Navbar/SettingIcon';
 import TagIcon from '../../assets/Navbar/TagIcon';
 import ShoppingIcon from '../../assets/Navbar/ShoppingIcon';
+import { useSelector } from 'react-redux';
+import { selectUserData } from '../../slices/userSlices';
 
 const Tab = createBottomTabNavigator();
 
 const NavBar = () => {
+
+  const User = useSelector(selectUserData);
+
   return (
 
     <Tab.Navigator
@@ -70,7 +76,22 @@ const NavBar = () => {
             justifyContent: "center",
             alignItems: "center"
           }}>
-            <UserIcon color={focused ? colors.dark : colors.icon} />
+            {
+              User.picture ?
+                <>
+                  <Image
+                    style={{
+                      width: SPACING * 4.5,
+                      height: SPACING * 4.5,
+                      borderColor: colors.lightBlue,
+                      borderWidth: 2,
+                      borderRadius: SPACING * 4,
+                    }}
+                    source={{ uri: `${User.picture}` }}
+                  />
+                </> :
+                <UserIcon color={focused ? colors.dark : colors.icon} />
+            }
           </View>
         )
       }} />

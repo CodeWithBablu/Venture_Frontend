@@ -15,9 +15,9 @@ export default {
     lemon: '#FFEA00',
     green: '#266A61',
     dark: '#2f2f2f',
-    back: '#F2E5E0',
-    primary: '#78AD92',
-    secondary: '#A1B59F'
+    back: '#ba9f95',
+    primary: '#ffffff',
+    secondary: '#fc84a2'
   },
   profile: {
     back: '#B18C95',
