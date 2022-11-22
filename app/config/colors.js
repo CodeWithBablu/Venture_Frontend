@@ -24,6 +24,12 @@ export default {
     primary: '#849b94',
     secondary: '#c0e2d8',
     text: '#018594'
+  },
+  cart: {
+    back: '#BDC3CB',
+    backsec: '#F6F6F7',
+    button: '#E55B37',
+    buttonsec: '#F9CBB6'
   }
 };
 
